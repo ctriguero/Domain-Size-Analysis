@@ -8,6 +8,8 @@
 
 #include <ctime>
 
+#include <stdlib.h> // use system
+
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"      /* Black */
 #define RED     "\033[31m"      /* Red */
@@ -38,10 +40,10 @@ int main( int argc, const char* argv[] )
 	//------------------------------------------------------------------
 	//------------------------------------------------------------------
 	int Nc=5 ; // Number of stored cluster sizes
-	string SaveS0             = "no" ;    // yes to store positions of s=0 sites
+	string SaveS0             = "yes" ;    // yes to store positions of s=0 sites
 	string Save_S_cooling_ppm = "yes" ;    // yes to directly store S-field images
-	string SaveSp1            = "no" ;    // yes to store positions of s=+1 sites
-	string SaveSm1            = "no" ;    // yes to store positions of s=-1 sites
+	string SaveSp1            = "yes" ;    // yes to store positions of s=+1 sites
+	string SaveSm1            = "yes" ;    // yes to store positions of s=-1 sites
 	//------------------------------------------------------------------
 	//------------------------------------------------------------------
 	// Parameters for the calculation:
@@ -291,10 +293,9 @@ int main( int argc, const char* argv[] )
 						{
 							for ( int jj=0; jj<L-1; jj++)
 							{											
-								for ( int kk=0; kk<X.size(); kk++)  if ( ( ii == X[kk] )  && ( jj == Y[kk] ))  OutMapSppm << "0   82  33 " << endl ; // 0 82 33 or 26 102 46
+								for ( int kk=0; kk<X.size(); kk++)  if ( ( ii == X[kk] )  && ( jj == Y[kk] ))  OutMapSppm << "255 255 153" << endl ; //  verde 0   82  33  
 								for ( int kk=0; kk<Xp.size(); kk++) if ( ( ii == Xp[kk] ) && ( jj == Yp[kk] )) OutMapSppm << "153 0   0  " << endl ; 
-								for ( int kk=0; kk<Xm.size(); kk++) if ( ( ii == Xm[kk] ) && ( jj == Ym[kk] )) OutMapSppm << "70  130 180" << endl ; 
-								kkonter++ ;
+								for ( int kk=0; kk<Xm.size(); kk++) if ( ( ii == Xm[kk] ) && ( jj == Ym[kk] )) OutMapSppm << "70  130 180" << endl ; // 
 							}
 						}
 						//  ffmpeg -i Frame_no_%04d_s0.ppm -c:v libx264 -r 30 out.mp4
@@ -392,10 +393,10 @@ int main( int argc, const char* argv[] )
 	cout << "Total execution time: " << BOLDBLACK << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << RESET << endl;
 
 	// This transforms the light images into a light video trhough ffmpeg
-	if ( Save_S_cooling_ppm == "yes" )
-	{
-		system("ffmpeg -i Frame_no_%04d_s0.ppm -c:v libx264 -r 30 output.mp4)"
-	}
+//	if ( Save_S_cooling_ppm == "yes" )
+//	{
+//		system("ffmpeg -i Frame_no_%04d_s0.ppm -c:v libx264 -r 30 output.mp4") ;
+//	}
 	
 	return (0) ;
 }
