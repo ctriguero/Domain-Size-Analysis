@@ -38,14 +38,24 @@ using namespace std;
 int main( int argc, const char* argv[] )
 {
 
+	if ( argc == 1 )
+	{
+
+		cout << " " << endl ;
+		cout << "\t Wrong usage. You should execute:" << endl ;
+		cout << BOLDRED << "\t " << argv[0] << " [File to analyze.sd]" << RESET << endl ;
+		cout << " " << endl ;
+		return (0) ;
+	}
+
 	/// Parameters for the calculation:
 	//------------------------------------------------------------------
 	//------------------------------------------------------------------
-	int Nc=5 ; // Number of stored cluster sizes
-	string SaveS0             = "no" ;    /// SaveS0=yes to store positions of s=0 sites
-	string Save_S_cooling_ppm = "yes" ;   /// Save_S_cooling_ppm=yes to directly store S-field images in ppm format
-	string SaveSp1            = "no" ;    /// SaveSp1=yes to store positions of s=+1 sites
-	string SaveSm1            = "no" ;    /// SaveSm1=yes to store positions of s=-1 sites
+	int Nc=5 ;				/// Number of stored cluster sizes
+	string SaveS0             = "no" ;	/// SaveS0=yes to store positions of s=0 sites
+	string Save_S_cooling_ppm = "yes" ;	/// Save_S_cooling_ppm=yes to directly store S-field images in ppm format
+	string SaveSp1            = "no" ;	/// SaveSp1=yes to store positions of s=+1 sites
+	string SaveSm1            = "no" ;	/// SaveSm1=yes to store positions of s=-1 sites
 	//------------------------------------------------------------------
 	//------------------------------------------------------------------
 	// Parameters for the calculation:

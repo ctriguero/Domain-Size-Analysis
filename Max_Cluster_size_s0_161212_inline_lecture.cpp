@@ -103,6 +103,15 @@ its original value.
 in which each character is the original value of firstInitial.
 */
 
+	if ( argc == 1 )
+	{
+
+		cout << " " << endl ;
+		cout << "\t Wrong usage. You should execute:" << endl ;
+		cout << BOLDRED << "\t " << argv[0] << " [File to analyze.sd]" << RESET << endl ;
+		cout << " " << endl ;
+		return (0) ;
+	}
 
 	/// \brief Parameters for the calculation:
 	//------------------------------------------------------------------
