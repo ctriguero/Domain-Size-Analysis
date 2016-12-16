@@ -1,18 +1,11 @@
 size 13 8
 
 set texlabels 1
-!http://cloford.com/resources/colours/500col.htm
 begin graph
    scale auto
    !title "Box plot"
    xtitle "Driving parameter, $\tau$" hei 0.5
    ytitle "Untransformed space size, $S_{\rm max}$" hei 0.5
-   !xaxis off
-   !xlabels off
-   !yaxis off
-   !ylabels off
-   !xticks off
-   !yticks off
    xaxis min -0.5 max -0.4 ! for example1: 0-15 for example2: 0-200
    yaxis log min 1 max 11000
    
@@ -24,21 +17,15 @@ begin graph
 	data "all_f.dat" d6 =c1,c6
 	data "all_f.dat" d7 =c1,c7
 	data "all_f.dat" d8 =c1,c8
-	        
-	!d1 line color black lwidth 0.025  BEFORE 200 average
-	!d3 line color steelblue lwidth 0.025
 
-	d1 deresolve 200 average marker fcircle color black msize 0.05     
-	d2 deresolve 200 average marker fcircle color blue msize 0.05    
-	d3 deresolve 200 average marker fcircle color green msize 0.05      
-	d4 deresolve 200 average marker fcircle color yellow msize 0.05     
-	d5 deresolve 200 average marker fcircle color orange msize 0.05    
-	d6 deresolve 200 average marker fcircle color red msize 0.05
-	d7 deresolve 200 average marker fcircle color maroon msize 0.05
-	d8 deresolve 200 average marker fcircle color purple msize 0.05                        
-
-!	d8 deresolve 200 average smooth !marker fcircle color red msize 0.05      
-
+	d1 deresolve 500 average marker fcircle color black msize 0.05     
+	d2 deresolve 500 average marker fcircle color blue msize 0.05    
+	d3 deresolve 500 average marker fcircle color green msize 0.05      
+	d4 deresolve 500 average marker fcircle color yellow msize 0.05     
+	d5 deresolve 500 average marker fcircle color orange msize 0.05    
+	d6 deresolve 500 average marker fcircle color red msize 0.05
+	d7 deresolve 500 average marker fcircle color maroon msize 0.05
+	d8 deresolve 500 average marker fcircle color purple msize 0.05                        
 end graph
 
 set hei 0.3
