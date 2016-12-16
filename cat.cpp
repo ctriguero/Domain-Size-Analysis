@@ -41,15 +41,15 @@ int main( int argc, const char* argv[] )
 
 	OutputFile << "# /bin/bash " << endl ;
 	OutputFile << endl ;
-	OutputFile << "# Remove header" << endl ;
-	OutputFile << "for seed in $(seq 1 1 445)" << endl ;
-	OutputFile << "do" << endl ;
-	OutputFile << "sed -i '1d' Tau_Sm1_Sm_$seed.dat" << endl ;
-	OutputFile << "done" << endl ;
+//	OutputFile << "# Remove header" << endl ;
+//	OutputFile << "for seed in $(seq 1 1 1548)" << endl ;
+//	OutputFile << "do" << endl ;
+//	OutputFile << "sed -i '1d' Tau_Sm1_Sm_$seed.dat" << endl ;
+//	OutputFile << "done" << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Join all the files" << endl ;
 	OutputFile << "cat " ;
-	for (unsigned int k=1; k<445; k++) OutputFile << "Tau_Sm1_Sm_" << k << ".dat " ;
+	for (unsigned int k=1; k<1549; k++) OutputFile << "Tau_Sm1_Sm_" << k << ".dat " ;
 	OutputFile << "> all.dat" << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Order the file" << endl ;
@@ -59,6 +59,8 @@ int main( int argc, const char* argv[] )
 	OutputFile << "gle -d pdf -cairo smax.gle" << endl ;
 
 	system("chmod +x cat_command.sh");
-	system("./cat_command.sh");
+	cout << "Bash script ready to be launched:" << endl ;
+	// to execute we use sh ...
+	system("sh cat_command.sh");
 	return (0) ;
 }
