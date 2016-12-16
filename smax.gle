@@ -1,0 +1,64 @@
+size 13 8
+
+set texlabels 1
+!http://cloford.com/resources/colours/500col.htm
+begin graph
+   scale auto
+   !title "Box plot"
+   xtitle "Driving parameter, $\tau$" hei 0.5
+   ytitle "Untransformed space size, $S_{\rm max}$" hei 0.5
+   !xaxis off
+   !xlabels off
+   !yaxis off
+   !ylabels off
+   !xticks off
+   !yticks off
+   xaxis min -0.5 max -0.4 ! for example1: 0-15 for example2: 0-200
+   yaxis log min 1 max 11000
+   
+	data "all_f.dat" d1 =c1,c7
+	data "all_f.dat" d2 =c1,c2
+	data "all_f.dat" d3 =c1,c3
+	data "all_f.dat" d4 =c1,c4
+	data "all_f.dat" d5 =c1,c5
+	data "all_f.dat" d6 =c1,c6
+!	data "all_f.dat" d7 =c1,c7
+!	data "all_f.dat" d8 =c1,c8
+	        
+	!d1 line color black lwidth 0.025  BEFORE 200 average
+	!d3 line color steelblue lwidth 0.025
+
+	d1 deresolve 500 average marker fcircle color black msize 0.05     
+	d2 deresolve 500 average marker fcircle color blue msize 0.05    
+	d3 deresolve 500 average marker fcircle color green msize 0.05      
+	d4 deresolve 500 average marker fcircle color yellow msize 0.05     
+	d5 deresolve 500 average marker fcircle color orange msize 0.05    
+	d6 deresolve 500 average marker fcircle color red msize 0.05
+	d7 deresolve 500 average marker fcircle color maroon msize 0.05
+	d8 deresolve 500 average marker fcircle color purple msize 0.05                        
+
+!	d8 deresolve 200 average smooth !marker fcircle color red msize 0.05      
+
+end graph
+
+set hei 0.3
+begin key
+nobox
+pos tl
+line color black text "$S_{\rm max}$" lwidth 0.1
+line color blue text "$S^{\rm 1}_{\rm max}$" lwidth 0.1
+line color green text "$S^{\rm 2}_{\rm max}$" lwidth 0.1
+line color yellow text "$S^{\rm 3}_{\rm max}$" lwidth 0.1
+line color orange text "$S^{\rm 4}_{\rm max}$" lwidth 0.1
+line color red text "$S^{\rm 5}_{\rm max}$" lwidth 0.1
+end key
+
+set hei 0.3
+begin key
+nobox
+pos tc
+text "Cooling, $1000$ Realizations"
+text "$N=100\times 99$" 
+text "$\Delta=0.45$"
+text "Average 500"
+end key
