@@ -28,14 +28,14 @@ begin graph
 	!d1 line color black lwidth 0.025  BEFORE 200 average
 	!d3 line color steelblue lwidth 0.025
 
-	d1 deresolve 500 average marker fcircle color black msize 0.05     
-	d2 deresolve 500 average marker fcircle color blue msize 0.05    
-	d3 deresolve 500 average marker fcircle color green msize 0.05      
-	d4 deresolve 500 average marker fcircle color yellow msize 0.05     
-	d5 deresolve 500 average marker fcircle color orange msize 0.05    
-	d6 deresolve 500 average marker fcircle color red msize 0.05
-	d7 deresolve 500 average marker fcircle color maroon msize 0.05
-	d8 deresolve 500 average marker fcircle color purple msize 0.05                        
+	d1 deresolve 200 average marker fcircle color black msize 0.05     
+	d2 deresolve 200 average marker fcircle color blue msize 0.05    
+	d3 deresolve 200 average marker fcircle color green msize 0.05      
+	d4 deresolve 200 average marker fcircle color yellow msize 0.05     
+	d5 deresolve 200 average marker fcircle color orange msize 0.05    
+	d6 deresolve 200 average marker fcircle color red msize 0.05
+	d7 deresolve 200 average marker fcircle color maroon msize 0.05
+	d8 deresolve 200 average marker fcircle color purple msize 0.05                        
 
 !	d8 deresolve 200 average smooth !marker fcircle color red msize 0.05      
 
@@ -57,8 +57,8 @@ set hei 0.3
 begin key
 nobox
 pos tc
-text "Cooling, $1310$ Realizations"
+text "Cooling, $110$ Realizations"
 text "$N=100\times 99$" 
-text "$\Delta=0.50$"
-text "Average 500"
+text "$\Delta=0.40$"
+text "Average 50"
 end key
