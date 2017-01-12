@@ -34,22 +34,20 @@ using namespace std;
 int main( int argc, const char* argv[] )
 {
 
-	//system("./rm_header.sh");
-
+	system("unzip Tau_Smax_data.zip");
 	std::ofstream OutputFile ;
 	OutputFile.open("cat_command.sh", ios::out) ;
-
 	OutputFile << "# /bin/bash " << endl ;
 	OutputFile << endl ;
-//	OutputFile << "# Remove header" << endl ;
-//	OutputFile << "for seed in $(seq 1 1 1548)" << endl ;
-//	OutputFile << "do" << endl ;
-//	OutputFile << "sed -i '1d' Tau_Sm1_Sm_$seed.dat" << endl ;
-//	OutputFile << "done" << endl ;
+	OutputFile << "# Remove header" << endl ;
+	OutputFile << "for seed in $(seq 1 1 10000)" << endl ;
+	OutputFile << "do" << endl ;
+	OutputFile << "sed -i '1d' Tau_Sm1_Sm_$seed.dat" << endl ;
+	OutputFile << "done" << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Join all the files" << endl ;
 	OutputFile << "cat " ;
-	for (unsigned int k=1; k<1549; k++) OutputFile << "Tau_Sm1_Sm_" << k << ".dat " ;
+	for (unsigned int k=1; k<10001; k++) OutputFile << "Tau_Sm1_Sm_" << k << ".dat " ;
 	OutputFile << "> all.dat" << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Order the file" << endl ;
@@ -59,8 +57,76 @@ int main( int argc, const char* argv[] )
 	OutputFile << "gle -d pdf -cairo smax.gle" << endl ;
 
 	system("chmod +x cat_command.sh");
-	cout << "Bash script ready to be launched:" << endl ;
+	cout << BOLDRED << "Bash script built & ready to be launched" << RESET << endl ;
 	// to execute we use sh ...
 	system("sh cat_command.sh");
+	system("rm cat_command.sh");
+	system("rm all.dat");
+	system("rm Tau_*.dat");
+	// GLE Graph
+	std::ofstream GleFile ;
+	GleFile.open("kk.gle", ios::out) ;
+
+	GleFile << "size 13 8" << endl ;
+	GleFile << "set texlabels 1" << endl ;
+	GleFile << "begin graph" << endl ;
+	GleFile << "   scale auto" << endl ;
+	GleFile << "   xtitle \"Driving parameter, $\\tau$\" hei 0.5" << endl ;
+	GleFile << "   ytitle \"Untransformed space size, $S_{\\rm max}$\" hei 0.5" << endl ;
+	GleFile << "   xaxis min -0.5 max -0.4" << endl ;
+	GleFile << "   yaxis log min 1 max 11000" << endl ;
+	GleFile << "	data \"all_f.dat\" d1 =c1,c22" << endl ;
+	GleFile << "	data \"all_f.dat\" d2 =c1,c2" << endl ;
+	GleFile << "	data \"all_f.dat\" d3 =c1,c3" << endl ;
+	GleFile << "	data \"all_f.dat\" d4 =c1,c4" << endl ;
+	GleFile << "	data \"all_f.dat\" d5 =c1,c5" << endl ;
+	GleFile << "	data \"all_f.dat\" d6 =c1,c6" << endl ;
+	GleFile << "	data \"all_f.dat\" d7 =c1,c7" << endl ;
+	GleFile << "	data \"all_f.dat\" d8 =c1,c8" << endl ;
+	GleFile << "	data \"all_f.dat\" d9 =c1,c9" << endl ;
+	GleFile << "	data \"all_f.dat\" d10 =c1,c10" << endl ;
+	GleFile << "	data \"all_f.dat\" d11 =c1,c11" << endl ;
+	GleFile << "	d1 deresolve 5000 average marker fcircle color black msize 0.05" << endl ; 
+	GleFile << "	d2 deresolve 5000 average marker fcircle color blue msize 0.05" << endl ; 
+	GleFile << "	d3 deresolve 5000 average marker fcircle color green msize 0.05" << endl ;    
+	GleFile << "	d4 deresolve 5000 average marker fcircle color yellow msize 0.05" << endl ;
+	GleFile << "	d5 deresolve 5000 average marker fcircle color orange msize 0.05" << endl ;    
+	GleFile << "	d6 deresolve 5000 average marker fcircle color red msize 0.05" << endl ;
+	GleFile << "	d7 deresolve 5000 average marker fcircle color maroon msize 0.05" << endl ;
+	GleFile << "	d8 deresolve 5000 average marker fcircle color purple msize 0.05" << endl ;
+	GleFile << "	d9 deresolve 5000 average marker fcircle color gray msize 0.05" << endl ;             
+	GleFile << "	d10 deresolve 5000 average marker fcircle color yellowgreen msize 0.05" << endl ;
+	GleFile << "	d11 deresolve 5000 average marker fcircle color rosybrown msize 0.05" << endl ;
+	GleFile << "end graph" << endl ;
+	GleFile << "set hei 0.3" << endl ;
+	GleFile << "begin key" << endl ;
+	GleFile << "nobox" << endl ;
+	GleFile << "pos tl" << endl ;
+	GleFile << "line color black text \"$S_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color blue text \"$S^1_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color green text \"$S^2_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color yellow text \"$S^3_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color orange text \"$S^4_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color red text \"$S^5_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color maroon text \"$S^6_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color purple text \"$S^7_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color gray text \"$S^8_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color yellowgreen text \"$S^9_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "line color rosybrown text \"$S^{10}_{\\rm max}$\" lwidth 0.1" << endl ;
+	GleFile << "end key" << endl ;
+	GleFile << "set hei 0.3" << endl ;
+	GleFile << "begin key" << endl ;
+	GleFile << "nobox" << endl ;
+	GleFile << "pos tc" << endl ;
+	GleFile << "text \"Cooling, $10000$ Realizations\"" << endl ;
+	GleFile << "text \"$N=100\\times 99$\"" << endl ;
+	GleFile << "text \"$\\Delta=0.50$\"" << endl ;
+	GleFile << "text \"Average 5000\"" << endl ;
+	GleFile << "end key" << endl ;
+	GleFile.close() ;
+
+	system("gle -d pdf -cairo kk.gle");
+	system("rm kk.gle");
+
 	return (0) ;
 }
