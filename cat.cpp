@@ -107,17 +107,17 @@ int main( int argc, const char* argv[] )
 	GleFile << "	data \"all_f.dat\" d9 =c1,c9" << endl ;
 	GleFile << "	data \"all_f.dat\" d10 =c1,c10" << endl ;
 	GleFile << "	data \"all_f.dat\" d11 =c1,c11" << endl ;
-	GleFile << "	d1 deresolve 100 average marker fcircle color black msize 0.05" << endl ; 
-	GleFile << "	d2 deresolve 100 average marker fcircle color blue msize 0.05" << endl ; 
-	GleFile << "	d3 deresolve 100 average marker fcircle color green msize 0.05" << endl ;    
-	GleFile << "	d4 deresolve 100 average marker fcircle color yellow msize 0.05" << endl ;
-	GleFile << "	d5 deresolve 100 average marker fcircle color orange msize 0.05" << endl ;    
-	GleFile << "	d6 deresolve 100 average marker fcircle color red msize 0.05" << endl ;
-	GleFile << "	d7 deresolve 100 average marker fcircle color maroon msize 0.05" << endl ;
-	GleFile << "	d8 deresolve 100 average marker fcircle color purple msize 0.05" << endl ;
-	GleFile << "	d9 deresolve 100 average marker fcircle color gray msize 0.05" << endl ;             
-	GleFile << "	d10 deresolve 100 average marker fcircle color yellowgreen msize 0.05" << endl ;
-	GleFile << "	d11 deresolve 100 average marker fcircle color rosybrown msize 0.05" << endl ;
+	GleFile << "	d1 deresolve " << Nfiles << " average marker fcircle color black msize 0.05" << endl ; 
+	GleFile << "	d2 deresolve " << Nfiles << " average marker fcircle color blue msize 0.05" << endl ; 
+	GleFile << "	d3 deresolve " << Nfiles << " average marker fcircle color green msize 0.05" << endl ;    
+	GleFile << "	d4 deresolve " << Nfiles << " average marker fcircle color yellow msize 0.05" << endl ;
+	GleFile << "	d5 deresolve " << Nfiles << " average marker fcircle color orange msize 0.05" << endl ;    
+	GleFile << "	d6 deresolve " << Nfiles << " average marker fcircle color red msize 0.05" << endl ;
+	GleFile << "	d7 deresolve " << Nfiles << " average marker fcircle color maroon msize 0.05" << endl ;
+	GleFile << "	d8 deresolve " << Nfiles << " average marker fcircle color purple msize 0.05" << endl ;
+	GleFile << "	d9 deresolve " << Nfiles << " average marker fcircle color gray msize 0.05" << endl ;             
+	GleFile << "	d10 deresolve " << Nfiles << " average marker fcircle color yellowgreen msize 0.05" << endl ;
+	GleFile << "	d11 deresolve " << Nfiles << " average marker fcircle color rosybrown msize 0.05" << endl ;
 	GleFile << "end graph" << endl ;
 	GleFile << "set hei 0.3" << endl ;
 	GleFile << "begin key" << endl ;
@@ -142,7 +142,7 @@ int main( int argc, const char* argv[] )
 	GleFile << "text \"Cooling, $" << Nfiles << "$ Realizations\"" << endl ;
 	GleFile << "text \"$N=100\\times 99$\"" << endl ;
 	GleFile << "text \"$\\Delta=0.80$\"" << endl ;
-	GleFile << "text \"Average 100\"" << endl ;
+	GleFile << "text \"Average " << Nfiles << "\"" << endl ;
 	GleFile << "end key" << endl ;
 	GleFile.close() ;
 
