@@ -41,7 +41,7 @@ int main( int argc, const char* argv[] )
 	system("unzip Tau_Smax_data.zip") ;
 
 	// BEGIN Detecting the number of files to process
-	system("ls Tau* | wc -l > NUMBER") ;
+	system("ls Tau_Sm1_Sm_*.dat | wc -l > NUMBER") ;
 	ifstream infi ;
 	infi.open("NUMBER") ;
 	string sLine;
@@ -52,7 +52,6 @@ int main( int argc, const char* argv[] )
 	int Nfiles = atoi(sLine.c_str()) ;
 	cout << "Number of files to be processed: " << Nfiles << endl ;
 	int NfilesP1 = Nfiles + 1 ;
-	//return (0) ;
 	// END Detecting the number of files to process
 
 
