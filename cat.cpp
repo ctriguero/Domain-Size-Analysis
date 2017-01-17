@@ -2,11 +2,16 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include<math.h> // use sqrt()
+#include <math.h> // use sqrt()
 #include <vector> // use vectors
 #include <algorithm> // use abs()
 
 #include <ctime>
+
+// Count directory
+#include <stdio.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"      /* Black */
@@ -33,21 +38,37 @@ using namespace std;
 
 int main( int argc, const char* argv[] )
 {
+	system("unzip Tau_Smax_data.zip") ;
 
-	system("unzip Tau_Smax_data.zip");
+	// BEGIN Detecting the number of files to process
+	system("ls Tau* | wc -l > NUMBER") ;
+	ifstream infi ;
+	infi.open("NUMBER") ;
+	string sLine;
+	getline(infi, sLine) ;
+    	infi.close() ;
+	system("rm -fv NUMBER") ;
+	// string to integer:
+	int Nfiles = atoi(sLine.c_str()) ;
+	cout << "Number of files to be processed: " << Nfiles << endl ;
+	int NfilesP1 = Nfiles + 1 ;
+	//return (0) ;
+	// END Detecting the number of files to process
+
+
 	std::ofstream OutputFile ;
 	OutputFile.open("cat_command.sh", ios::out) ;
 	OutputFile << "# /bin/bash " << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Remove header" << endl ;
-	OutputFile << "for seed in $(seq 1 1 10000)" << endl ;
+	OutputFile << "for seed in $(seq 1 1 "<< Nfiles <<")" << endl ;
 	OutputFile << "do" << endl ;
 	OutputFile << "sed -i '1d' Tau_Sm1_Sm_$seed.dat" << endl ;
 	OutputFile << "done" << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Join all the files" << endl ;
 	OutputFile << "cat " ;
-	for (unsigned int k=1; k<10001; k++) OutputFile << "Tau_Sm1_Sm_" << k << ".dat " ;
+	for (unsigned int k=1; k<NfilesP1; k++) OutputFile << "Tau_Sm1_Sm_" << k << ".dat " ;
 	OutputFile << "> all.dat" << endl ;
 	OutputFile << endl ;
 	OutputFile << "# Order the file" << endl ;
@@ -73,7 +94,7 @@ int main( int argc, const char* argv[] )
 	GleFile << "   scale auto" << endl ;
 	GleFile << "   xtitle \"Driving parameter, $\\tau$\" hei 0.5" << endl ;
 	GleFile << "   ytitle \"Untransformed space size, $S_{\\rm max}$\" hei 0.5" << endl ;
-	GleFile << "   xaxis min -0.5 max -0.4" << endl ;
+	GleFile << "   xaxis min -0.5 max -0.37" << endl ;
 	GleFile << "   yaxis log min 1 max 11000" << endl ;
 	GleFile << "	data \"all_f.dat\" d1 =c1,c22" << endl ;
 	GleFile << "	data \"all_f.dat\" d2 =c1,c2" << endl ;
@@ -86,17 +107,17 @@ int main( int argc, const char* argv[] )
 	GleFile << "	data \"all_f.dat\" d9 =c1,c9" << endl ;
 	GleFile << "	data \"all_f.dat\" d10 =c1,c10" << endl ;
 	GleFile << "	data \"all_f.dat\" d11 =c1,c11" << endl ;
-	GleFile << "	d1 deresolve 5000 average marker fcircle color black msize 0.05" << endl ; 
-	GleFile << "	d2 deresolve 5000 average marker fcircle color blue msize 0.05" << endl ; 
-	GleFile << "	d3 deresolve 5000 average marker fcircle color green msize 0.05" << endl ;    
-	GleFile << "	d4 deresolve 5000 average marker fcircle color yellow msize 0.05" << endl ;
-	GleFile << "	d5 deresolve 5000 average marker fcircle color orange msize 0.05" << endl ;    
-	GleFile << "	d6 deresolve 5000 average marker fcircle color red msize 0.05" << endl ;
-	GleFile << "	d7 deresolve 5000 average marker fcircle color maroon msize 0.05" << endl ;
-	GleFile << "	d8 deresolve 5000 average marker fcircle color purple msize 0.05" << endl ;
-	GleFile << "	d9 deresolve 5000 average marker fcircle color gray msize 0.05" << endl ;             
-	GleFile << "	d10 deresolve 5000 average marker fcircle color yellowgreen msize 0.05" << endl ;
-	GleFile << "	d11 deresolve 5000 average marker fcircle color rosybrown msize 0.05" << endl ;
+	GleFile << "	d1 deresolve 100 average marker fcircle color black msize 0.05" << endl ; 
+	GleFile << "	d2 deresolve 100 average marker fcircle color blue msize 0.05" << endl ; 
+	GleFile << "	d3 deresolve 100 average marker fcircle color green msize 0.05" << endl ;    
+	GleFile << "	d4 deresolve 100 average marker fcircle color yellow msize 0.05" << endl ;
+	GleFile << "	d5 deresolve 100 average marker fcircle color orange msize 0.05" << endl ;    
+	GleFile << "	d6 deresolve 100 average marker fcircle color red msize 0.05" << endl ;
+	GleFile << "	d7 deresolve 100 average marker fcircle color maroon msize 0.05" << endl ;
+	GleFile << "	d8 deresolve 100 average marker fcircle color purple msize 0.05" << endl ;
+	GleFile << "	d9 deresolve 100 average marker fcircle color gray msize 0.05" << endl ;             
+	GleFile << "	d10 deresolve 100 average marker fcircle color yellowgreen msize 0.05" << endl ;
+	GleFile << "	d11 deresolve 100 average marker fcircle color rosybrown msize 0.05" << endl ;
 	GleFile << "end graph" << endl ;
 	GleFile << "set hei 0.3" << endl ;
 	GleFile << "begin key" << endl ;
@@ -118,15 +139,16 @@ int main( int argc, const char* argv[] )
 	GleFile << "begin key" << endl ;
 	GleFile << "nobox" << endl ;
 	GleFile << "pos tc" << endl ;
-	GleFile << "text \"Cooling, $10000$ Realizations\"" << endl ;
+	GleFile << "text \"Cooling, $" << Nfiles << "$ Realizations\"" << endl ;
 	GleFile << "text \"$N=100\\times 99$\"" << endl ;
-	GleFile << "text \"$\\Delta=0.50$\"" << endl ;
-	GleFile << "text \"Average 5000\"" << endl ;
+	GleFile << "text \"$\\Delta=0.80$\"" << endl ;
+	GleFile << "text \"Average 100\"" << endl ;
 	GleFile << "end key" << endl ;
 	GleFile.close() ;
 
 	system("gle -d pdf -cairo kk.gle");
-	system("rm kk.gle");
+	system("rm -fv kk.gle");
+	system("rm -fv all_f.dat");
 
 	return (0) ;
 }
